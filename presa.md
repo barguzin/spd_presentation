@@ -119,7 +119,63 @@ where $\beta_0$ - intercept, $\beta$ - coefficients quantifying linear effect of
 # INLA and SPDE 
 
 * Spatial distribution models $\sim$ latent Gaussian models 
-* Identify distribution of the observed dat and link its mean to the linear predictor (previous formula)
+* Identify distribution of the observed data and link its mean to the linear predictor (previous formula)
+
+---
+
+# What is INLA? 
+
+* Approximate Bayesian Inference for latent Gaussian (GMRF) models 
+* pros: low computational cost, high accuracy, LGM!, complex models, applied and applicable, works well with hard-to-fit models (prior to INLA) 
+
+--- 
+
+# Latent Gaussian Models
+
+* Observations $y_i$ 
+* Gaussian random field $x_j$ 
+* non-Gaussian hyperparameters $\theta_k$ 
+
+$$
+\pi(x, \theta|y) \propto \pi(\theta) \times \pi(x|\theta) \times \prod \pi(y_i |x_i, \theta) 
+$$
+
+* The main task is compute posterior marginal distributions (via integrated Laplace approximations) 
+
+$$
+\pi(x_j|y) \quad \text{and} \quad \pi(\theta_k|y)
+$$
+
+---
+
+# Examples of LGMs 
+
+dynamic linear models, GLM, GAM, measurement error models, spline smoothing, functional data analysis, log-Gaussian Cox-processes, model-based geostatsics, survival models. 
+
+### LGMs only a way to compute, not to model! 
+
+---
+
+# Laplace approximation 
+
+* Approximating integrals 
+
+$$
+\int \exp(-ng(x))dx \approx \sqrt{\frac{2 \pi}{n g'' (x_0)}}
+$$
+
+* High accuracy: relative error $\mathcal{O}(1/n)$
+* Algo: for each $x_1$: 
+    * compute mode and curvature at the mode 
+    * use the Laplace approximation to integrate out $x_2$
+
+---
+
+# GMRF - 'Gaussian on graphs'
+
+* conditional independence 
+* sparse precision matrix $q$ 
+* numerical algorithms for sparse matrices 
 
 ---
 
